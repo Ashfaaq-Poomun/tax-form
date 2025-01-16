@@ -74,6 +74,8 @@ To set up this project on your local machine, make sure you have the following i
    **login.js**
    **lougout.js**
    **signup.js**
+   from folder src>js.
+   Save all files
 
 ### Steps to Run:
 
