@@ -79,7 +79,7 @@ To set up this project on your local machine, make sure you have the following i
 
 ### Steps to Run:
 
-1. **Replace firebaseConfig for Firebse configure**:
+1. **Run Live Server**:
 
    run Live Server on VS code and open the app by navigating to http://localhost:xxxx/public/index.html
 
