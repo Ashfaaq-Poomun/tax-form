@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Income Tax Revenue Collection Form</title>
+  <link href="../src/css/output.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body class="bg-gray-50">
+  <header class="bg-gray-200">
+    <nav class="flex justify-between items-center w-[92%] mx-auto py-4">
+      <div>
+        <img class="h-10 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=blue&shade=600"
+          alt="Your Company" />
+      </div>
+      <div
+        class="nav-links duration-500 md:static absolute bg-gray-200 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
+        <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+          <li>
+            <a class="hover:text-gray-500" href="#">Home</a>
+          </li>
+          <li>
+            <a class="text-blue-600 font-semibold hover:text-blue-700" href="tax-form.html">Our services</a>
+          </li>
+          <li>
+            <a class="hover:text-gray-500" href="#">About Us</a>
+          </li>
+          <li>
+            <a class="hover:text-gray-500" href="#">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+      <div class="flex items-center gap-6">
+        <button id="logout"
+          class="flex justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          Log Out
+        </button>
+        <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
+    </nav>
+  </header>
+
+  <div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-6">Income Tax Revenue Collection Form</h1>
+    <form id="tax-form" novalidate>
+      <!-- Accordion for Personal Information -->
+      <div class="mb-4">
+        <button type="button"
+          class="w-full text-left font-semibold text-lg bg-gray-200 px-4 py-2 rounded-lg flex justify-between"
+          data-accordion="toggle" data-target="#personal-info" aria-expanded="false">
+          Personal Information
+          <svg xmlns="http://www.w3.org/2000/svg" class="border border-gray-800 rounded-full p-1" width="30" height="30"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path class="line" d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg>
+        </button>
+        <div id="personal-info" class="hidden mt-2 accordion-content">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 border rounded-lg">
+            <div>
+              <label for="full-name" class="block font-medium mb-1">Full Name</label>
+              <input type="text" id="full-name" name="full-name"
+                class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                required>
+              <p class="text-red-500 text-sm hidden full-name-error">Full Name is required.</p>
+            </div>
+            <div>
+              <label for="nid" class="block font-medium mb-1">NID Number</label>
+              <input type="text" id="nid" name="nid"
+                class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                pattern="^[A-Za-z]\d{12}[A-Za-z0-9]$" required>
+              <p class="text-red-500 text-sm hidden" id="nid-error">Invalid NID format.</p>
+              <p class="text-red-500 text-sm hidden nid-required-error">NID is required and must follow the correct
+                format.</p>
+              <p class="text-yellow-500 text-sm hidden" id="nid-length-error">NID must be exactly 14 characters long.
+              </p>
+
+            </div>
+            <div>
+              <label for="email" class="block font-medium mb-1">Email Address</label>
+              <input type="email" id="email" name="email"
+                class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                required>
+              <p class="text-red-500 text-sm hidden email-required-error">Email Address is required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion for Income Details -->
+      <div class="mb-4">
+        <button type="button"
+          class="w-full text-left font-semibold text-lg bg-gray-200 px-4 py-2 rounded-lg flex justify-between"
+          data-accordion="toggle" data-target="#income-details" aria-expanded="false">
+          Income Details
+          <svg xmlns="http://www.w3.org/2000/svg" class="border border-gray-800 rounded-full p-1" width="30" height="30"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path class="line" d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg>
+        </button>
+        <div id="income-details" class="hidden mt-2 accordion-content">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 border rounded-lg">
+            <div>
+              <label for="annual-salary" class="block font-medium mb-1">Annual Salary</label>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-800">Rs</span>
+                <input type="number" id="annual-salary" name="annual-salary"
+                  class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                  min="0" placeholder="0" required>
+              </div>
+              <p class="text-red-500 text-sm hidden" id="annual-salary-error">Annual Salary must be a positive number.
+              </p>
+              <p class="text-red-500 text-sm hidden annual-salary-required-error">Annual Salary is required and must be
+                a
+                positive number.</p>
+
+            </div>
+            <div>
+              <label for="investment" class="block font-medium mb-1">Investment Losses/Gains</label>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-800">Rs</span>
+                <input type="number" id="investment" name="investment"
+                  class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                  value="0">
+              </div>
+            </div>
+            <div class="md:col-span-3">
+              <label for="additional-income" class="block font-medium mb-1">Additional Income Sources</label>
+              <div id="additional-income-container" class="space-y-4">
+              </div>
+              <button type="button" class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-lg hover:bg-blue-600"
+                onclick="addAdditionalIncome()">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion for Deductions -->
+      <div class="mb-4">
+        <button type="button"
+          class="w-full text-left font-semibold text-lg bg-gray-200 px-4 py-2 rounded-lg flex justify-between"
+          data-accordion="toggle" data-target="#deductions" aria-expanded="false">
+          Deductions
+          <svg xmlns="http://www.w3.org/2000/svg" class="border border-gray-800 rounded-full p-1" width="30" height="30"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path class="line" d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg>
+        </button>
+        <div id="deductions" class="hidden mt-2 accordion-content">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 border rounded-lg">
+            <div>
+              <label for="charitable-donations" class="block font-medium mb-1">Charitable Donations</label>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-800">Rs</span>
+                <input type="number" id="charitable-donations" name="charitable-donations"
+                  class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                  min="0" max="50000" value="0">
+              </div>
+              <p class="text-red-500 text-sm hidden" id="charitable-donations-error">Charitable Donations must be
+                between Rs0 and
+                Rs50,000.</p>
+
+            </div>
+            <div>
+              <label for="mortgage-interest" class="block font-medium mb-1">Mortgage Interest</label>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-800">Rs</span>
+                <input type="number" id="mortgage-interest" name="mortgage-interest"
+                  class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                  min="0" value="0">
+              </div>
+              <p class="text-red-500 text-sm hidden" id="mortgage-interest-error">Mortgage Interest must be a positive
+                number.</p>
+            </div>
+            <div>
+              <label for="pension" class="block font-medium mb-1">Pension Scheme</label>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-gray-800">Rs</span>
+                <input type="number" id="pension" name="pension"
+                  class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                  min="0" value="0">
+              </div>
+              <p class="text-red-500 text-sm hidden" id="pension-error">Pension Scheme must be a positive number.</p>
+            </div>
+            <div><label for="dependents" class="block font-medium mb-1">Number of Dependents</label>
+              <input type="number" id="dependents" name="dependents"
+                class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300"
+                min="0" placeholder="0" required>
+              <p class="text-red-500 text-sm hidden" id="dependents-error">Number of Dependents must be a positive
+                number.
+              </p>
+              <p class="text-red-500 text-sm hidden dependents-required-error">Number of Dependents is required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tax Calculation Summary -->
+      <div class="mb-4">
+        <div class="w-full text-left font-semibold text-lg bg-gray-200 px-4 py-2 rounded-lg flex justify-between">
+          Tax Calculation Summary
+        </div>
+        <div id="tax-summary" class="mt-2">
+          <div class="p-4 border rounded-lg space-y-4">
+            <!-- Total Income -->
+            <div class="flex justify-between items-center">
+              <label for="total-income" class="block font-medium mb-1">Total Income</label>
+              <span id="total-income" class="font-medium text-lg">Rs 0</span>
+            </div>
+
+            <!-- Tax Rate -->
+            <div class="flex justify-between items-center">
+              <label for="tax-rate" class="block font-medium mb-1">Tax Rate</label>
+              <span id="tax-rate" class="font-medium text-lg">0%</span>
+            </div>
+
+            <!-- Tax Notice -->
+            <div class="flex justify-between items-center">
+              <label for="tax-notice" class="block font-medium mb-1">Tax Notice</label>
+              <span id="tax-notice" class="font-medium text-lg">Rs 0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-right">
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="../src/js/logout.js" defer></script>
+  <script type="module" src="../src/js/accordion.js" defer></script>
+  <script type="module" src="../src/js/validations.js" defer></script>
+  <script type="module" src="../src/js/calculation.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script>
+    const navLinks = document.querySelector('.nav-links')
+    function onToggleMenu(e) {
+      e.name = e.name === 'menu' ? 'close' : 'menu'
+      navLinks.classList.toggle('top-[9%]')
+      navLinks.classList.toggle('top-[-1%]')
+    }
+  </script>
+  <script>
+    function addAdditionalIncome() {
+      const container = document.getElementById('additional-income-container');
+      container.classList.remove('hidden');
+      const row = document.createElement('div');
+      row.className = 'grid grid-cols-1 gap-4 md:grid-cols-4 items-end';
+
+      row.innerHTML = `
+                <div>
+                    <label for="income-source" class="block font-medium mb-1">Source of Income</label>
+                    <input type="text" name="income-source" class="w-full border rounded-lg px-3 py-2">
+                </div>
+                <div>
+                    <label for="income-date" class="block font-medium mb-1">Date</label>
+                    <input type="date" name="income-date" class="w-full border rounded-lg px-3 py-2">
+                </div>
+                <div>
+                    <label for="income-amount" class="block font-medium mb-1">Amount</label>
+                    <span class="flex items-center gap-2">
+                      <span class="font-medium text-gray-800">Rs</span>
+                      <input type="number" id="income-amount" name="income-amount" class="w-full border rounded-lg px-3 py-2 hover:border-blue-600 hover:bg-blue-50 focus:border-blue-700 focus:ring focus:ring-blue-300" min="0" oninput="validateIncomeAmount(this)" value="0">
+                    </span>
+                    <p class="text-red-500 text-sm hidden income-error mt-1">Amount must be a positive number.</p>
+                </div>
+                <div>
+                    <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 flex items-center justify-center" onclick="removeAdditionalIncome(this)">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>                    
+                    </button>  
+                </div>
+            `;
+
+      container.appendChild(row);
+    }
+
+    function validateIncomeAmount(input) {
+      const error = input.closest('div').querySelector('.income-error');
+      if (input.value < 0) {
+        error.classList.remove('hidden');
+      } else {
+        error.classList.add('hidden');
+      }
+    }
+
+    function removeAdditionalIncome(button) {
+      const container = document.getElementById('additional-income-container');
+      button.parentElement.parentElement.remove();
+      if (!container.children.length) {
+        container.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+
+</html>
