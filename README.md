@@ -35,7 +35,7 @@ To set up this project on your local machine, make sure you have the following i
 
    ```bash
    https://github.com/Ashfaaq-Poomun/tax-form.git
-   cd income-tax-revenue-form
+   cd tax-form
    ```
 
    Or
